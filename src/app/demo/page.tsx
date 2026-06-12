@@ -516,27 +516,46 @@ export default function DemoPage() {
                     >
                       {authLoading ? 'Signing In...' : 'Verify & Enter'} <ArrowRight className="h-4 w-4" />
                     </button>
+
+                    <div className="text-center pt-1 text-xs">
+                      <button
+                        type="button"
+                        onClick={() => setShowSignup(true)}
+                        className="text-blue-500 dark:text-blue-400 font-bold hover:underline"
+                      >
+                        {"Don't have an account? Sign Up"}
+                      </button>
+                    </div>
                     
                     {/* Demo shortcut helpers */}
-                    <div className="grid grid-cols-2 gap-3 pt-3 border-t border-slate-100 dark:border-slate-850">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setLoginForm({ email: 'student@example.com', password: 'password123' });
-                        }}
-                        className="py-2 rounded-xl text-[10px] font-bold border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-500"
-                      >
-                        Autofill Student (Demo)
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setLoginForm({ email: 'admin@example.com', password: 'password123' });
-                        }}
-                        className="py-2 rounded-xl text-[10px] font-bold border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-500"
-                      >
-                        Autofill Admin (Demo)
-                      </button>
+                    <div className="space-y-3 pt-3 border-t border-slate-100 dark:border-slate-850">
+                      <div className="grid grid-cols-2 gap-3">
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setLoginForm({ email: 'student@example.com', password: 'password123' });
+                            setSignupForm({ name: 'Demo Student', email: 'student@example.com', password: 'password123', role: 'student' });
+                          }}
+                          className="py-2 rounded-xl text-[10px] font-bold border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-500"
+                        >
+                          Autofill Student (Demo)
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setLoginForm({ email: 'admin@example.com', password: 'password123' });
+                            setSignupForm({ name: 'Demo Admin', email: 'admin@example.com', password: 'password123', role: 'admin' });
+                          }}
+                          className="py-2 rounded-xl text-[10px] font-bold border border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-900 text-slate-500"
+                        >
+                          Autofill Admin (Demo)
+                        </button>
+                      </div>
+                      {isApiConnected && (
+                        <p className="text-[10px] text-center text-slate-400 dark:text-slate-500 leading-normal">
+                          ℹ️ Live DB is connected. If logging in for the first time, click <strong>Sign Up</strong> above to register.
+                        </p>
+                      )}
                     </div>
                   </form>
                 ) : (
@@ -593,18 +612,18 @@ export default function DemoPage() {
                     >
                       {authLoading ? 'Registering...' : 'Register User'} <Check className="h-4.5 w-4.5" />
                     </button>
+
+                    <div className="text-center pt-1 text-xs">
+                      <button
+                        type="button"
+                        onClick={() => setShowSignup(false)}
+                        className="text-blue-500 dark:text-blue-400 font-bold hover:underline"
+                      >
+                        Already have an account? Sign In
+                      </button>
+                    </div>
                   </form>
                 )}
-
-                {/* Toggle signin/signup footer */}
-                <div className="text-center pt-2 text-xs">
-                  <button
-                    onClick={() => setShowSignup(!showSignup)}
-                    className="text-blue-500 dark:text-blue-400 font-bold hover:underline"
-                  >
-                    {showSignup ? 'Already have an account? Sign In' : "Don't have an account? Sign Up"}
-                  </button>
-                </div>
               </motion.div>
             ) : (
               /* LOGGED IN ACTIVE DASHBOARD views */
